@@ -26,7 +26,7 @@ Publish-AppImage for .NET requires (*):
 
 
 ## Build HelloWorld ##
-The github repository povides a simple "HelloWorld" terminal demo application.
+The github repository provides a simple "HelloWorld" terminal demo application.
 
 <img title="Terminal Screenshot" alt="Terminal Screenshot" src="Screenie.png" style="width:50%;max-width:600px;"/>
 
