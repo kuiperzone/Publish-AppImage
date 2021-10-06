@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    <id>${APP_ID}</id>
+    <metadata_license>MIT</metadata_license>
+    <project_license>MIT</project_license>
+
+    <name>${DE_NAME}</name>
+    <summary>${DE_COMMENT}</summary>
+
+    <description>
+        <p>No description available (TBD).</p>
+    </description>
+
+    <releases>
+        <release version="${VERSION}" date="${ISO_DATE}">
+            <description><p>This is a test release.</p></description>
+        </release>
+    </releases>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>https://via.placeholder.com/800x450.png/0000FF/808080?text=Screenshot+(TBD)</image>
+        </screenshot>
+    </screenshots>
+
+    <developer_name>YourName</developer_name>
+    <url type="homepage">https://example.net/</url>
+
+</component>
