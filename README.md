@@ -5,7 +5,7 @@
 # Publish-AppImage for .NET #
 
 **Publish-AppImage for .NET** is a simple bash script deployment utility which calls `dotnet publish` and
-packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command. The the Linux
+packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command. The Linux
 "Desktop Entry" file is generated automagically.
 
 It is licensed under MIT and for use on Linux with the [Microsoft .NET SDK](https://dotnet.microsoft.com/download)
