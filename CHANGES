@@ -1,2 +1,8 @@
+Version 1.1.0
+o Exports new APPDIR_ROOT variable.
+o Now checks for target binary after POST_PUBLISH (instead of before) in case this command actually creates it.
+o Does not create/overwrite AppRun if POST_PUBLISH creates it.
+
+
 Version 1.0.0
 First release. Tested against .NET SDK 5.0.
