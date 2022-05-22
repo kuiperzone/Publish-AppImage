@@ -1,3 +1,11 @@
+Version 1.1.2
+o Updated HelloWorld appdata.xml to avoid warnings.
+o Fixed typos in readme
+o Added gitignore
+
+Version 1.1.1
+o Fixed typo.
+
 Version 1.1.0
 o Exports new APPDIR_ROOT variable.
 o Now checks for target binary after POST_PUBLISH (instead of before) in case this command actually creates it.

@@ -76,14 +76,14 @@ An icon and appdata.xml may optionally be included in the AppImage. See the Hell
 ### Target Platform ###
 By default, publish-appimage will build for "linux-x64". However, you can specify the dotnet "runtime identifier" as:
 
-    ./publish-appimage.conf -r linux-arm64
+    ./publish-appimage -r linux-arm64
 
 For information, see: https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
 
 ### Version ###
 It's possible to provide your application version at the command-line:
 
-    ./publish-appimage.conf -x 1.2.3
+    ./publish-appimage -x 1.2.3
 
 This will call publish with the `-p:Version` option and set the `VERSION` environment variable for use by
 appimagetool. In the .conf file, there is also an option to version the output package filename.
@@ -92,13 +92,13 @@ appimagetool. In the .conf file, there is also an option to version the output p
 Your application source project may contain multiple .conf files, and can you specify the configuration to use at
 the command line:
 
-    ./publish-appimage.conf -f other-file.conf
+    ./publish-appimage -f other-file.conf
 
 ### Zip and Windows? ###
 Amazingly, it is possible to build for Windows on a Linux box, although the binary is not suitable for use with
 the AppImage format. However, you can do this instead:
 
-    ./publish-appimage.conf -r win-x64 -k zip
+    ./publish-appimage -r win-x64 -k zip
 
 This will create a simple zip file of the published content instead of an AppImage file.
 

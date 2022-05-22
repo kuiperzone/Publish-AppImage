@@ -10,11 +10,11 @@
 # CONSTANTS
 ###############################
 
-declare -r _SCRIPT_VERSION="1.1.0"
+declare -r _SCRIPT_VERSION="1.1.2"
 declare -r _SCRIPT_TITLE="Publish-AppImage for .NET"
 declare -r _SCRIPT_IMPL_MIN=1
 declare -r _SCRIPT_IMPL_MAX=1
-declare -r _SCRIPT_COPYRIGHT="Copyright 2021 Andy Thomas"
+declare -r _SCRIPT_COPYRIGHT="Copyright 2022 Andy Thomas"
 declare -r _SCRIPT_WEBSITE="https://kuiper.zone/"
 
 declare -r _SCRIPT_NAME="publish-appimage"

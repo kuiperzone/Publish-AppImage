@@ -3,12 +3,14 @@
     <id>${APP_ID}</id>
     <metadata_license>MIT</metadata_license>
     <project_license>MIT</project_license>
+    <content_rating type="oars-1.1" />
 
     <name>${DE_NAME}</name>
     <summary>${DE_COMMENT}</summary>
 
     <description>
-        <p>No description available (TBD).</p>
+        <p>A longer description. This needs to be of minimum length, otherwise AppImageTool will give you a warning.
+        No description available (TBD). Add your own.</p>
     </description>
 
     <releases>
@@ -23,7 +25,7 @@
         </screenshot>
     </screenshots>
 
-    <developer_name>YourName</developer_name>
+    <developer_name>Your Name</developer_name>
     <url type="homepage">https://example.net/</url>
 
 </component>
