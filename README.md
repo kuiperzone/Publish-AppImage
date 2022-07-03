@@ -64,11 +64,11 @@ the directory to the `PATH`. This way, only the ".conf file" need go into your p
 specify the location with `DOTNET_PROJECT_PATH` in the .conf file.
 
 **Note**, by default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
-working directly. However, all project related paths in the .conf file itself are relative to the location of the
-.conf file, and not from where command was called.
+working directly. It is possible to have multiple .conf file -- see below. All project related paths in the .conf file
+itself are relative to the location of the .conf file, and not from where command was called.
 
 **IMPORTANT**: Edit the configuration file for your application, providing an application name etc. This should be a
-relativel trivial matter and **all parameters are documented** with comments. You can specify application
+relatively trivial matter and **all parameters are documented** with comments. You can specify application
 "Desktop Entry" fields here, as well as publish/build arguments, and project and output locations.
 
 If you wish to use an `appdata.xml`, copy the "Hello World" `appdata.xml` file and use it as a template in your project,
