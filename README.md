@@ -79,7 +79,7 @@ An icon may also optionally be included in the AppImage. Ensure that your `publi
 file location using `APP_ICON_SRC`.
 
 ## App Versioning ##
-Use the APP_VERSION parameter in the .conf file to specify your application version, i.e. "1.2.3.0".
+Use the `APP_VERSION` parameter in the .conf file to specify your application version, i.e. "1.2.3.0".
 
 This will call publish with the `-p:Version` option and set the `VERSION` environment variable for use by
 appimagetool. In the .conf file, you may optionally version the output package filename with `PKG_VERSION_FLAG`.
