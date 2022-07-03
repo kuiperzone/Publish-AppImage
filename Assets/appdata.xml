@@ -10,12 +10,12 @@
 
     <description>
         <p>A longer description. This needs to be of minimum length, otherwise AppImageTool will give you a warning.
-        No description available (TBD). Add your own.</p>
+        No description available (TBD). Add your own here. This is a test - AppRoot: ${APPDIR_ROOT}</p>
     </description>
 
     <releases>
-        <release version="${VERSION}" date="${ISO_DATE}">
-            <description><p>This is a test release.</p></description>
+        <release version="${APP_VERSION}" date="${ISO_DATE}">
+            <description><p>This is a test release only.</p></description>
         </release>
     </releases>
 

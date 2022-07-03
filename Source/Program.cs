@@ -1,7 +1,7 @@
 ﻿// #############################################################################
 // PROJECT   : Publish-AppImage for .NET
-// WEBPAGE   : https://kuiper.zone/publish-appimage-dotnet/
-// COPYRIGHT : Andy Thomas 2021
+// WEBPAGE   : https://github.com/kuiperzone/Publish-AppImage
+// COPYRIGHT : Andy Thomas 2021-2022
 // LICENSE   : MIT
 // #############################################################################
 

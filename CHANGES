@@ -1,3 +1,8 @@
+Version 1.2.0
+o Versioning of project output changed! Removed version (-x) arg from command line. Instead, specify APP_VERSION in the .conf file.
+o Added dummy "post-publish.sh" file for test purposes only.
+o Updates to readme file and conf file
+
 Version 1.1.2
 o Updated HelloWorld appdata.xml to avoid warnings.
 o Fixed typos in readme
