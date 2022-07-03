@@ -87,7 +87,7 @@ appimagetool. In the .conf file, you may optionally version the output package f
 ## Post Publish Command ##
 The configuration contains an option called `POST_PUBLISH`. This may contain one or more commands, or point
 to a script file. It is called after `dotnet publish`, but before the final AppImage output. You can use
-to create require directory structures under `AppDir` or copy additional files there.
+to create required directory structures under `AppDir` or copy additional files there.
 
 See also "Non-.NET Projects", below.
 
