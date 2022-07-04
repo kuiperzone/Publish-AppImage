@@ -24,7 +24,8 @@ Publish-AppImage for .NET requires (*):
 
 
 ## Build HelloWorld ##
-A simple "HelloWorld" terminal demo application is provided with the script.
+A simple "HelloWorld" terminal demo application is provided with the script and the configuration (.conf) file. Clone
+or download the entire project, and follow the instructions below.
 
 <img title="Terminal Screenshot" alt="Terminal Screenshot" src="Screenie.png" style="width:50%;max-width:600px;"/>
 
@@ -44,15 +45,15 @@ has the executable flag set. From the top-level project directory, simply type:
 
     ./publish-appimage
 
-This will call `dot publish` and create the output local to the .conf file, i.e.: *AppImages/HelloWorld-x86_64.AppImage*
+This will call `dot publish` and create an output directory local to the .conf file, i.e.: *AppImages/HelloWorld-x86_64.AppImage*
 
 Run `AppImages/HelloWorld-x86_64.AppImage` from a terminal, and it will output version and location information
 available to application. That's all it does!
 
 
 ## Use in Your Project ##
-There are only two files you really need. Drop the files, below, into your application source preferably at the
-same level as your solution (.sln) or project (.csproj) file (*).
+There are only two files you really need, although you may wish to create an `appdata.xml` file as well. Drop the
+files, below, into your application source preferably at the same level as your solution (.sln) or project (.csproj) file (*).
 
 * `publish-appimage` - the utility
 * `publish-appimage.conf` - your project config
@@ -64,10 +65,10 @@ the directory to the `PATH`. This way, only the ".conf file" need go into your p
 specify the location with `DOTNET_PROJECT_PATH` in the .conf file.
 
 **Note**, by default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
-working directly. It is possible to have multiple .conf files (see below). All project related paths in the .conf file
-itself are relative to the location of the .conf file, and not from where command was called.
+working directly. It is entirely possible to have multiple .conf files of different names (see below). All project
+related paths in the .conf file itself are relative to the location of the .conf file, and not from where command was called.
 
-**IMPORTANT**: Edit the configuration file for your application, providing an application name etc. This should be a
+**IMPORTANT**: Now edit the configuration file for your application, providing an application name etc. This should be a
 relatively trivial matter and **all parameters are documented** with comments. You can specify application
 "Desktop Entry" fields here, as well as publish/build arguments, and project and output locations.
 
