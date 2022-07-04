@@ -42,14 +42,19 @@ to this as appropriate:
     APPIMAGETOOL_COMMAND="/home/user/Apps/appimagetool-x86_64.AppImage"
 
 The `publish-appimage` file itself is just a bash script so there is no need to "build" it, but ensure that it
-has the executable flag set. From the top-level project directory, simply type:
+has the executable flag set. From the top-level project (the same directory as the .conf file), simply type:
 
     ./publish-appimage
 
-This will call `dot publish` and create an output directory local to the .conf file, i.e.: *AppImages/HelloWorld-x86_64.AppImage*
+This will call `dot publish` (with "linux-x64) as default and create an output directory local to the .conf file,
+i.e.: *AppImages/HelloWorld-x86_64.AppImage*
 
-Run `AppImages/HelloWorld-x86_64.AppImage` from a terminal, and it will output version and location information
-available to application. That's all it does!
+If your system is ARM, type this instead:
+
+    ./publish-appimage -r linux-arm64
+
+Run `AppImages/HelloWorld-x86_64.AppImage` (or the arch64 variant) from a terminal, and it will output version
+and location information available to application. That's all it does!
 
 
 ## Use in Your Project ##
