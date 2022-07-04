@@ -6,10 +6,11 @@
 
 **Publish-AppImage for .NET** is a simple bash script deployment utility which calls `dotnet publish` and
 packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command. The Linux
-"Desktop Entry" file is generated automagically.
+"Desktop Entry" file is generated automagically. An `appdata.xml` file may optionally be used to help create
+the AppImage file.
 
-It is licensed under MIT and is for use on Linux with the [Microsoft .NET SDK](https://dotnet.microsoft.com/download)
-(i.e. for C# applications).
+Publish-AppImage for .NET is licensed under MIT and is for use on Linux with the
+[Microsoft .NET SDK](https://dotnet.microsoft.com/download) (i.e. for C# applications).
 
 
 ## Pre-requisits ##
@@ -77,8 +78,7 @@ it as a template in your project, changing or adding properties to suit. Ensure 
 references the file location using `APP_XML_SRC`. If you do not wish to use `appdata.xml`, ensure that
 `APP_XML_SRC` is unset.
 
-An icon may also optionally be included in the AppImage. Ensure that your `publish-appimage.conf` references the
-file location using `APP_ICON_SRC`.
+Ensure that your `publish-appimage.conf` references an icon file location using `APP_ICON_SRC`.
 
 ## App Versioning ##
 Use the `APP_VERSION` parameter in the .conf file to specify your application version, i.e. "1.2.3.0".
