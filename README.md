@@ -46,7 +46,7 @@ has the executable flag set. From the top-level project (the same directory as t
 
     ./publish-appimage
 
-This will call `dot publish` (with "linux-x64) as default and create an output directory local to the .conf file,
+This will call `dot publish` (with "linux-x64 as default) and create an output directory local to the .conf file,
 i.e.: *AppImages/HelloWorld-x86_64.AppImage*
 
 If your system is ARM, type this instead:
