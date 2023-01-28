@@ -105,7 +105,7 @@ as this is a mandatory requirement.
 Use the `APP_VERSION` parameter in the .conf file to specify your application version, i.e. "1.2.3.0".
 
 This will call `dotnet publish` with the `-p:Version` option (overriding any version value in your project files)
-and sets the `VERSION` environment variable for use b appimagetool. In the .conf file, you may optionally version
+and sets the `VERSION` environment variable for use by appimagetool. In the .conf file, you may optionally version
 the output package filename with `PKG_VERSION_FLAG`.
 
 Alternatively, leave `APP_VERSION` unset to prefer application version information already provided in your project.
