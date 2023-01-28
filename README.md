@@ -87,7 +87,7 @@ below.
 
 Now edit the configuration file for your own application, providing an application name etc. This should be a
 relatively trivial matter and **all parameters are documented** with comments. You can specify application
-"Desktop Entry" fields here, as well as publish/build arguments, as well as project and output locations. Note tht
+"Desktop Entry" fields here, as well as publish/build arguments, along with project and output locations. Note that
 all project related paths in the .conf file itself are relative to the location of the .conf file, and not from where
 command was called.
 
