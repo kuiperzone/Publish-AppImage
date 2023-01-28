@@ -6,18 +6,22 @@
     <content_rating type="oars-1.1" />
 
     <name>${DE_NAME}</name>
-    <summary>${DE_COMMENT}</summary>
+    <summary>Test application only</summary>
 
     <description>
-        <p>A longer description. This needs to be of minimum length, otherwise AppImageTool will give you a warning.
-        No description available (TBD). Add your own here. This is a test - AppRoot: ${APPDIR_ROOT}</p>
+        <p>This is a longer description. There is a minimum length for this, otherwise AppImageTool will
+        give you a warning. Replace this with your own here. This is a test - AppRoot: ${APPDIR_ROOT}</p>
     </description>
 
     <releases>
         <release version="${APP_VERSION}" date="${ISO_DATE}">
-            <description><p>This is a test release only.</p></description>
+            <description><p>This is the latest release.</p></description>
         </release>
     </releases>
+
+	<launchable type="desktop-id">${APP_ID}.desktop</launchable>
+    <developer_name>Your Name</developer_name>
+    <url type="homepage">https://example.net/</url>
 
     <screenshots>
         <screenshot type="default">
@@ -25,7 +29,8 @@
         </screenshot>
     </screenshots>
 
-    <developer_name>Your Name</developer_name>
-    <url type="homepage">https://example.net/</url>
+    <provides>
+		<id>${APP_ID}.desktop</id>
+	</provides>
 
 </component>

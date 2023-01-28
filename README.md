@@ -5,9 +5,16 @@
 # Publish-AppImage for .NET #
 
 **Publish-AppImage for .NET** is a simple bash script deployment utility which calls `dotnet publish` and
-packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command. The Linux
-"Desktop Entry" file is generated automagically. An `appdata.xml` file may optionally be used to help create
-the AppImage file.
+packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command.
+
+To use it, you fill out the option fields in a simple configuration file called `publish-appimage.conf`, and run:
+
+    ./publish-appimage
+
+This builds/publishes your project and generates a distributable AppImage output file for use on Linux systems.
+A Linux "Desktop Entry" file is generated automagically from the values provided by you in the configuration file.
+Additionlly, Freedesktop.org AppStream metadata (`appdata.xml`) is optionally supported. Detailed explanations, examples
+and a demo application are provided below.
 
 Publish-AppImage for .NET is licensed under MIT and is for use on Linux with the
 [Microsoft .NET SDK](https://dotnet.microsoft.com/download) (i.e. for C# applications).
@@ -25,8 +32,11 @@ Publish-AppImage for .NET requires (*):
 
 
 ## Build HelloWorld ##
-A simple "HelloWorld" terminal demo application is provided with the script and the configuration (.conf) file. Clone
-or download the entire project, and follow the instructions below.
+A simple "HelloWorld" terminal demo application is provided with the script and the configuration (.conf) file.
+You may use the .conf and `appdata.xml` files contained in this demo as templates for your own application.
+
+Let's start by building and running the "HelloWorld" demo. Clone or download the entire project, and follow
+the instructions below.
 
 <img title="Terminal Screenshot" alt="Terminal Screenshot" src="Screenie.png" style="width:50%;max-width:600px;"/>
 
@@ -54,46 +64,55 @@ If your system is ARM, type this instead:
     ./publish-appimage -r linux-arm64
 
 Run `AppImages/HelloWorld-x86_64.AppImage` (or the arch64 variant) from a terminal, and it will output version
-and location information available to application. That's all it does!
+and location information available to the application. That's all it does!
 
 
 ## Use in Your Project ##
-There are only two files you really need, although you may wish to create an `appdata.xml` file as well. Drop the
-files, below, into your application source preferably at the same level as your solution (.sln) or project (.csproj) file (*).
+There are only two files you really need (although you may wish to use an `appdata.xml` file). Drop the files,
+below, into your application source preferably at the same level as your solution (.sln) or project (.csproj) file (*).
 
 * `publish-appimage` - the utility
 * `publish-appimage.conf` - your project config
 
 Alternatively, if you wish, you may put the `publish-appimage` script in any directory on your system and add
-the directory to the `PATH`. This way, only the ".conf file" need go into your project.
+its directory to your `PATH`. This way, only the ".conf file" need go into your project.
 
 (*) If you do not wish to put `publish-appimage.conf` in the same directory as your .sln or .csproj, you can
 specify the location with `DOTNET_PROJECT_PATH` in the .conf file.
 
-**Note**, by default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
-working directly. It is entirely possible to have multiple .conf files of different names (see below). All project
-related paths in the .conf file itself are relative to the location of the .conf file, and not from where command was called.
+**IMPORTNT**: By default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
+working directly. However, it is entirely possible to have multiple .conf files of different names in the same
+directory. You are not restricted to a single conf file in your project! See the "--conf" command option described
+below.
 
-**IMPORTANT**: Now edit the configuration file for your application, providing an application name etc. This should be a
+Now edit the configuration file for your own application, providing an application name etc. This should be a
 relatively trivial matter and **all parameters are documented** with comments. You can specify application
-"Desktop Entry" fields here, as well as publish/build arguments, and project and output locations.
+"Desktop Entry" fields here, as well as publish/build arguments, as well as project and output locations. Note tht
+all project related paths in the .conf file itself are relative to the location of the .conf file, and not from where
+command was called.
 
-If you wish to use an `appdata.xml`, copy the "Hello World" `appdata.xml` file from the "Assets" directory and use
-it as a template in your project, changing or adding properties to suit. Ensure that your `publish-appimage.conf`
-references the file location using `APP_XML_SRC`. If you do not wish to use `appdata.xml`, ensure that
-`APP_XML_SRC` is unset.
+<img title="Example Configuration" alt="Example Configuration" src="ExampleConf.png" style="width:50%;max-width:600px;"/>
 
-Ensure that your `publish-appimage.conf` references an icon file location using `APP_ICON_SRC`.
+If you wish to use a Freedesktop.org metadata file, copy the "Hello World" `appdata.xml` file from the "Assets"
+directory and use it as a template in your project, changing or adding properties to suit. Ensure that your
+`publish-appimage.conf` correctly references the file location using `APP_XML_SRC`. If you do not wish to use
+`appdata.xml`, ensure that `APP_XML_SRC` is unset.
+
+Ensure also that your `publish-appimage.conf` references an icon file location using `APP_ICON_SRC`,
+as this is a mandatory requirement.
 
 ## App Versioning ##
 Use the `APP_VERSION` parameter in the .conf file to specify your application version, i.e. "1.2.3.0".
 
-This will call publish with the `-p:Version` option and set the `VERSION` environment variable for use by
-appimagetool. In the .conf file, you may optionally version the output package filename with `PKG_VERSION_FLAG`.
+This will call `dotnet publish` with the `-p:Version` option (overriding any version value in your project files)
+and sets the `VERSION` environment variable for use b appimagetool. In the .conf file, you may optionally version
+the output package filename with `PKG_VERSION_FLAG`.
+
+Alternatively, leave `APP_VERSION` unset to prefer application version information already provided in your project.
 
 ## Post Publish Command ##
-The configuration contains an option called `POST_PUBLISH`. This may contain one or more commands, or point
-to a script file. It is called after `dotnet publish`, but before the final AppImage output. You can use
+The configuration contains an option called `POST_PUBLISH`. This may contain one or more commands, or point to a
+script file for example. It is called after `dotnet publish`, but before the final AppImage output. You can use this
 to create required directory structures under `AppDir` or copy additional files there.
 
 See also "Non-.NET Projects", below.
@@ -156,13 +175,23 @@ This will create a simple zip file of the published content instead of an AppIma
         -y, --skip-yes
         Skip confirmation prompt flag (assumes yes).
 
+        -o, --output
+        Explicit final output filename (excluding directory part).
 
 ## Additional Information ##
 Publish-AppImage for .NET was created by Andy Thomas at https://kuiper.zone
 
 See also my other C# project, a cross-platform Avalonia XAML previewer called [AvantGarde](https://github.com/kuiperzone/AvantGarde).
 
-### Gotcha - symlink ###
+### Gotchas ###
+
+#### Metadata Validation ####
+The appimagetool validates the application metadata file (appdata.xml) prior to generating the AppImage output.
+However, validation appears to be somewhat pedantic and may cause problems. In this case, you may leave the
+`APP_XML_SRC` configuration option empty to omit metadata. See also the following for clues and leads in problem
+solving: https://github.com/AppImage/AppImageKit/issues/603
+
+#### Symlink ####
 If you are using VirtualBox with your project within a shared folder, note that symbolic links are disabled within
 shared folders by VirtualBox, and this will prevent `appimagetool` from working. To overcome this, copy
 your entire project to your home directory in the virtual machine. Alternatively, it is possible to enable shared-folder

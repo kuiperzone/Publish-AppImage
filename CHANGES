@@ -1,3 +1,12 @@
+Version 1.3.0
+
+o Added "launchable" and "provides" to template appdata.xml file. This should avoid pedantic warnings
+performed by appimagetool when validating APP_XML_SRC metadata (*).
+o Added "--output" option to explicitly specify the final output filename part.
+o Minor changes to documentation.
+
+(*) See for info: https://github.com/AppImage/AppImageKit/issues/603
+
 Version 1.2.0
 o Versioning of project output changed! Removed version (-x) arg from command line. Instead, specify APP_VERSION in the .conf file.
 o Added dummy "post-publish.sh" file for test purposes only.

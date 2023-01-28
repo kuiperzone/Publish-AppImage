@@ -2,7 +2,7 @@
 ################################################################################
 # PROJECT   : Publish-AppImage for .NET
 # WEBPAGE   : https://github.com/kuiperzone/Publish-AppImage
-# COPYRIGHT : Andy Thomas 2021-2022
+# COPYRIGHT : Andy Thomas 2021-2023
 # LICENSE   : MIT
 ################################################################################
 
@@ -10,11 +10,11 @@
 # CONSTANTS
 ###############################
 
-declare -r _SCRIPT_VERSION="1.2.1"
+declare -r _SCRIPT_VERSION="1.3.0"
 declare -r _SCRIPT_TITLE="Publish-AppImage for .NET"
 declare -r _SCRIPT_IMPL_MIN=1
 declare -r _SCRIPT_IMPL_MAX=1
-declare -r _SCRIPT_COPYRIGHT="Copyright 2022 Andy Thomas"
+declare -r _SCRIPT_COPYRIGHT="Copyright 2023 Andy Thomas"
 declare -r _SCRIPT_WEBSITE="https://github.com/kuiperzone/Publish-AppImage"
 
 declare -r _SCRIPT_NAME="publish-appimage"
@@ -138,6 +138,12 @@ declare -r _SKIPYES_ARG_NAME="skip-yes"
 _skipyes_arg_value=false
 _arg_syntax="${_arg_syntax}${_SKIPYES_ARG}"
 
+# Output name
+declare -r _OUTPUT_ARG="o"
+declare -r _OUTPUT_ARG_NAME="output"
+_output_arg_value=""
+_arg_syntax="${_arg_syntax}${_OUTPUT_ARG}:"
+
 # Show version
 declare -r _VERSION_ARG="v"
 declare -r _VERSION_ARG_NAME="version"
@@ -162,6 +168,7 @@ for arg in "${@}"; do
     ("--${_RUNAPP_NAME}") set -- "$@" "-${_RUNAPP_ARG}" ;;
     ("--${_VERBOSE_ARG_NAME}") set -- "$@" "-${_VERBOSE_ARG}" ;;
     ("--${_SKIPYES_ARG_NAME}") set -- "$@" "-${_SKIPYES_ARG}" ;;
+    ("--${_OUTPUT_ARG_NAME}") set -- "$@" "-${_OUTPUT_ARG}" ;;
     ("--${_VERSION_ARG_NAME}") set -- "$@" "-${_VERSION_ARG}" ;;
     ("--${_HELP_ARG_NAME}") set -- "$@" "-${_HELP_ARG}" ;;
     ("--"*)
@@ -185,6 +192,7 @@ if [ ${_exit_help} == 0 ]; then
             (${_RUNAPP_ARG}) _runapp_arg_value=true ;;
             (${_VERBOSE_ARG}) _verbose_arg_value=true ;;
             (${_SKIPYES_ARG}) _skipyes_arg_value=true ;;
+            (${_OUTPUT_ARG}) _output_arg_value="${OPTARG}" ;;
             (${_VERSION_ARG}) _version_arg_value=true ;;
             (${_HELP_ARG}) _help_arg_value=true ;;
             (*)
@@ -235,6 +243,9 @@ if [ ${_help_arg_value} == true ] || [ $_exit_help != 0 ]; then
     echo
     echo "${_indent}-${_SKIPYES_ARG}, --${_SKIPYES_ARG_NAME}"
     echo "${_indent}Skip confirmation prompt flag (assumes yes)."
+    echo
+    echo "${_indent}-${_OUTPUT_ARG}, --${_OUTPUT_ARG_NAME}"
+    echo "${_indent}Explicit final output filename (excluding directory part)."
     echo
 
     echo "Example:"
@@ -447,7 +458,14 @@ fi
 if [ "${_kind_arg_value}" == "${_APPIMAGE_KIND}" ]; then
 
     # AppImageTool
-    _package_out="${PKG_OUTPUT_DIR}/${APP_MAIN}${_version_out}${_file_out_arch}${PKG_APPIMAGE_SUFFIX}"
+    echo "OUTPUT VAR: ${_output_arg_value}"
+
+    if [ "${_output_arg_value}" != "" ]; then
+        _package_out="${PKG_OUTPUT_DIR}/${_output_arg_value}"
+        echo "PACKAGE OUT: ${_package_out}"
+    else
+        _package_out="${PKG_OUTPUT_DIR}/${APP_MAIN}${_version_out}${_file_out_arch}${PKG_APPIMAGE_SUFFIX}"
+    fi
 
     _package_cmd="${APPIMAGETOOL_COMMAND}"
 
@@ -464,7 +482,12 @@ if [ "${_kind_arg_value}" == "${_APPIMAGE_KIND}" ]; then
 else
 
     # Simple zip
-    _package_out="${PKG_OUTPUT_DIR}/${APP_MAIN}${_version_out}${_file_out_arch}.zip"
+    if [ "${_output_arg_value}" != "" ]; then
+        _package_out="${PKG_OUTPUT_DIR}/${_output_arg_value}"
+    else
+        _package_out="${PKG_OUTPUT_DIR}/${APP_MAIN}${_version_out}${_file_out_arch}.zip"
+    fi
+
     _package_cmd="(cd \"${APPDIR_ROOT}\" && zip -r \"${PWD}/${_package_out}\" ./)"
 
     if [ ${_runapp_arg_value} == true ]; then
@@ -617,9 +640,9 @@ if [ "${_kind_arg_value}" == "${_APPIMAGE_KIND}" ]; then
 
     # Create desktop
     if [ "${_desktop}" != "" ]; then
-        _temp="${APPDIR_ROOT}/${APP_ID}.desktop"
-        echo "Creating: ${_temp}"
-        echo -e "${_desktop}" > "${_temp}"
+        _file="${APPDIR_ROOT}/${APP_ID}.desktop"
+        echo "Creating: ${_file}"
+        echo -e "${_desktop}" > "${_file}"
         assert_result
     fi
 
@@ -630,6 +653,18 @@ if [ "${_kind_arg_value}" == "${_APPIMAGE_KIND}" ]; then
         ensure_directory "${_dir}"
         echo -e "${_appxml}" > "${_file}"
         assert_result
+
+        if [ "${_desktop}" != "" ]; then
+            # Copy of desktop under "applications"
+            # Needed for launchable in appinfo.xml (if used)
+            # See https://github.com/AppImage/AppImageKit/issues/603
+            _dir="${APPDIR_SHARE}/applications"
+            _file="${_dir}/${APP_ID}.desktop"
+            echo "Creating: ${_file}"
+            ensure_directory "${_dir}"
+            echo -e "${_desktop}" > "${_file}"
+            assert_result
+        fi
     fi
 
     # Copy icon
