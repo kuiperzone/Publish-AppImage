@@ -10,7 +10,7 @@
 # CONSTANTS
 ###############################
 
-declare -r _SCRIPT_VERSION="1.3.0"
+declare -r _SCRIPT_VERSION="1.3.1"
 declare -r _SCRIPT_TITLE="Publish-AppImage for .NET"
 declare -r _SCRIPT_IMPL_MIN=1
 declare -r _SCRIPT_IMPL_MAX=1
@@ -458,11 +458,8 @@ fi
 if [ "${_kind_arg_value}" == "${_APPIMAGE_KIND}" ]; then
 
     # AppImageTool
-    echo "OUTPUT VAR: ${_output_arg_value}"
-
     if [ "${_output_arg_value}" != "" ]; then
         _package_out="${PKG_OUTPUT_DIR}/${_output_arg_value}"
-        echo "PACKAGE OUT: ${_package_out}"
     else
         _package_out="${PKG_OUTPUT_DIR}/${APP_MAIN}${_version_out}${_file_out_arch}${PKG_APPIMAGE_SUFFIX}"
     fi
