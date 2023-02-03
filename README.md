@@ -1,4 +1,4 @@
-<p style="text-align:center;background:gray;margin-bottom:4em;">
+<p style="text-align:left;background:gray;margin-bottom:4em;">
     <img src="Banner.png" style="width:50%;max-width:600px;"/>
 </p>
 
@@ -6,6 +6,30 @@
 
 **Publish-AppImage for .NET** is a simple bash script deployment utility which calls `dotnet publish` and
 packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command.
+
+# DEPRECATED #
+
+This software has been superceded by **PUBPAK for .NET**...
+
+<p style="text-align:left;">
+    <a href="https://github.com/kuiperzone/PubPak">
+        <img src="PUBPAK.png" style="width:50%;max-width:600px;"/>
+    </a>
+</p>
+
+[PUBPAK for .NET](https://github.com/kuiperzone/PubPak) does everything that Publish-AppImage does and more --
+and now supports FLATPAK as well as AppImage! **However, there's a catch...**
+
+I wrote PUBPAK with Flatpak support for use in deploying my own apps. However, I find that I am thwarted by the
+Flatpak Sandbox model. On investigation, I find there's a lot of discontent with the sandbox and I am wondering whether
+Flatpaks are the best way to go at all.
+
+I'm going to moving PUBPAK forward, but the questions is: *whether I continue to support Flatpak or focus on some
+other deployment, such as Snap, RPM or deb?*
+
+[I CREATED A POLL AND DISCUSSION HERE](https://github.com/kuiperzone/PubPak/discussions/1)
+
+*Continued...*
 
 To use it, you fill out the option fields in a simple configuration file called `publish-appimage.conf`, and run:
 
