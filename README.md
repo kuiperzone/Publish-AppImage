@@ -7,20 +7,28 @@
 **Publish-AppImage for .NET** is a simple bash script deployment utility which calls `dotnet publish` and
 packages the output as an [AppImage](https://appimage.org/) file (or zip) with a single command.
 
-To use it, you fill out the option fields in a simple configuration file called `publish-appimage.conf`, and run:
+## NOTICE ##
+Publish-AppImage for .NET for has been superseded by **Pupnet Deploy**:
+
+https://github.com/kuiperzone/PupNet-Deploy
+
+*Unlike Publish-AppImage, PupNet not only builds AppImages, but Windows Setup files, Flatpaks, Debs and RPMs.*
+
+
+To use Publish-AppImage, you fill out the option fields in a simple configuration file called `publish-appimage.conf`, and run:
 
     ./publish-appimage
 
 This builds/publishes your project and generates a distributable AppImage output file for use on Linux systems.
 A Linux "Desktop Entry" file is generated automagically from the values provided by you in the configuration file.
-Additionlly, Freedesktop.org AppStream metadata (`appdata.xml`) is optionally supported. Detailed explanations, examples
+Additionally, Freedesktop.org AppStream metadata (`appdata.xml`) is optionally supported. Detailed explanations, examples
 and a demo application are provided below.
 
 Publish-AppImage for .NET is licensed under MIT and is for use on Linux with the
 [Microsoft .NET SDK](https://dotnet.microsoft.com/download) (i.e. for C# applications).
 
 
-## Pre-requisits ##
+## Prerequisites ##
 Publish-AppImage for .NET requires (*):
 
 * Bash shell
@@ -80,7 +88,7 @@ its directory to your `PATH`. This way, only the ".conf file" need go into your 
 (*) If you do not wish to put `publish-appimage.conf` in the same directory as your .sln or .csproj, you can
 specify the location with `DOTNET_PROJECT_PATH` in the .conf file.
 
-**IMPORTNT**: By default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
+**IMPORTANT**: By default, `publish-appimage` will look for a file called `publish-appimage.conf` in the current
 working directly. However, it is entirely possible to have multiple .conf files of different names in the same
 directory. You are not restricted to a single conf file in your project! See the "--conf" command option described
 below.
